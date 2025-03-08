@@ -1,1 +1,23 @@
-Update this file to add the content
+version: '3.8'
+
+services:
+  personal-api:
+    image: udhayasb/22it051-personal-api
+    build: .  # Ensures it gets built
+    ports:
+      - "5000:5000"
+    command: ["python", "personal-api.py"]
+    depends_on:
+      - ml-model
+
+  ml-model:
+    image: udhayasb/22it051-ml-model
+    build: .  # Add this to avoid "manifest not found" error
+    ports:
+      - "6000:6000"
+    command: ["python", "ml-model.py"]
+  personl-api:
+    image: pranesh2005/22it032-personl-api
+    ports:
+      - "7000:7000"
+    command: ["python", "personal-api.py"]  # Ensure correct script
